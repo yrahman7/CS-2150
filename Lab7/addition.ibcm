@@ -1,0 +1,36 @@
+C00A 000	jmp	start	skip around the variables
+0000 001 x	dw	0	int x
+0000 002 y	dw	0	int y
+0000 003 z	dw	0 	int z
+0000 004 s	dw	0	int s of ongoing sum
+0000 005 zero	dw	0	
+0000 006 			leave space for changes
+0000 007 			
+0000 008
+0000 009
+1000 00A start	readH		read x in accumulator
+4001 00B    	store	x	x in memory
+1000 00C	readH		read y in accumulator
+4002 00D	store   y	y in memory
+1000 00E	readH		read z in accumulator
+4003 00F	store   z	z in memory
+3005 010    	load	zero	s = 0
+4004 011	store 	s	
+5001 012	add	x	s += x
+4004 013	store 	s
+3004 014	load	s	s += y
+5002 015	add	y
+4004 016	store	s
+3004 017	load	s	s += z
+5003 018	add	z
+4004 019	store	s
+1800 01A	printH 		print sum
+D01D 01B	jmpe		if (s==0) 
+C00A 01C	jmp	start	else jump to start
+3001 01D	load 	x    	print x
+1800 01E	printH
+3002 01F	load	y	print y
+1800 020	printH
+3003 021	load	z	print z
+1800 022	printH
+0000 023	halt
